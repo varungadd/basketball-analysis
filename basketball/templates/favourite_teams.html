@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favorite Teams</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Your CSS styling here, similar to the user dashboard */
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Favorite Teams</h1>
+    </header>
+
+    <div class="navbar">
+        <a href="home.html"><i class="fas fa-home"></i> Home</a>
+        <a href="standings.html"><i class="fas fa-list-alt"></i> Standings</a>
+        <a href="games.html"><i class="fas fa-basketball-ball"></i> Games</a>
+        <a href="teams.html"><i class="fas fa-users"></i> Teams</a>
+        <a href="news.html"><i class="fas fa-newspaper"></i> News</a>
+        <a href="logout.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </div>
+
+    <div class="dashboard-container">
+        <h2>Your Favorite Teams</h2>
+        <ul>
+            <li>Team A</li>
+            <li>Team B</li>
+            <li>Team C</li>
+        </ul>
+    </div>
+
+    <footer>
+        <p>© 2024 Basketball Analysis Tool</p>
+    </footer>
+</body>
+</html>

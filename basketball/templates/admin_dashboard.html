@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* General body styling for the dashboard */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        /* Header styling */
+        header {
+            background-color: #a60033;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Navigation bar styling */
+        .navbar {
+            background-color: #a60033;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .navbar a {
+            color: white;
+            padding: 10px 15px; 
+            text-decoration: none;
+            font-size: 18px;
+            margin: 0 10px;
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            transition: background-color 0.3s;
+        }
+
+        .navbar a i {
+            font-size: 24px; 
+        }
+
+        .navbar a:hover {
+            background-color: #800020;
+            border-radius: 5px;
+        }
+
+        .logout-button {
+            background-color: #FFD700;
+            color: black;
+            padding: 10px 20px; 
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-left: 20px; 
+            font-size: 18px; 
+            transition: background-color 0.3s;
+        }
+
+        .logout-button:hover {
+            background-color: #FFC107;
+        }
+
+        /* Dashboard Container */
+        .dashboard-container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        /* Title styling */
+        .dashboard-title {
+            text-align: center;  /* Center align the title */
+            font-weight: bold;   /* Make the title bold */
+            font-size: 28px;     /* Increase font size */
+            margin-bottom: 20px; /* Space below the title */
+        }
+
+        /* Player Card */
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .player-card {
+            flex: 1 1 200px; /* Flexible size for cards */
+            background-color: #ffe6e6; /* Light red background */
+            color: #a60033; /* Dark text color */
+            margin-bottom: 20px;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .player-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Player Image */
+        .player-card img {
+            width: 100px; /* Set a fixed width for player images */
+            height: 100px; /* Set a fixed height */
+            border-radius: 50%; /* Circular images */
+            margin-bottom: 10px;
+        }
+
+        /* Player Name and Video Count */
+        .player-card h3 {
+            margin-bottom: 5px;
+            font-size: 20px; /* Adjusted font size */
+        }
+
+        .player-card .badge {
+            background-color: #4CAF50;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 1em;
+            color: white; /* White text for badge */
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background-color: #800020; /* Maroon background */
+            color: white; /* White text color */
+            padding: 40px;
+            margin: 20px auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-section h2 {
+            text-align: center; /* Center the heading */
+            margin-bottom: 20px; /* Space below the heading */
+        }
+
+        .contact-info {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .contact-info ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .contact-info li {
+            margin: 5px 0;
+            font-size: 18px; /* Font size for contact info */
+        }
+
+        /* Social Media Links */
+        .social-media {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .social-media a {
+            margin: 0 10px;
+            color: white; /* White color for social media links */
+            font-size: 24px;
+        }
+
+        .social-media a:hover {
+            color: #FFD700; /* Yellow color on hover */
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            background-color: #800020;
+            color: white;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Basketball Analysis</h1>
+        <p>Welcome, Admin {{ user.username }}!</p>
+    </header>
+
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <a href="{{ url_for('home') }}"><i class="fas fa-home"></i> Home</a>
+        <a href="{{ url_for('games') }}"><i class="fas fa-basketball-ball"></i> Games</a>
+        <a href="{{ url_for('teams') }}"><i class="fas fa-users"></i> Teams</a>
+        <a href="{{ url_for('standings') }}"><i class="fas fa-list-alt"></i> Standings</a>
+        <button class="logout-button" onclick="window.location.href='{{ url_for('logout') }}'"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    </div>
+
+    <div class="dashboard-container">
+        <h2 class="dashboard-title">Admin Dashboard</h2>
+
+        <div class="row">
+            {% for player, videos in players.items() %}
+            <div class="player-card" onclick="location.href='{{ url_for('player_detail', player_id=player.id) }}'">
+                <img src="{{ url_for('static', filename='images/jack_taylor.jpg') }}" alt="Jack Taylor's Image">
+                <h3>{{ player.username }}</h3>
+                <p>Total Videos: <span class="badge">{{ videos | length }}</span></p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <div class="contact-section">
+        <h2>Contact Us</h2>
+        <p style="text-align: center;">If you have any questions, feel free to reach out to us:</p>
+        <div class="contact-info">
+            <ul>
+                <li>Email: nagamalt@srmist.edu.in</li>
+                <li>Phone: +91 91 76314 249</li>
+                <li>Address: SRM Nagar, Kattankulathur - 603 203, Chengalpattu District, Tamil Nadu.</li>
+            </ul>
+        </div>
+        <h3 style="text-align: center;">Follow Us</h3>
+        <div class="social-media">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.instagram.com/srm_basketball?igsh=MTRzeDE0emE5MGl1ZA=="><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2024 Basketball Analysis Tool</p>
+    </footer>
+</body>
+</html>

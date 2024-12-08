@@ -1,0 +1,777 @@
+/* General body styling */
+body {
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+/* Date-time styling */
+.date-time {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    font-size: 18px;
+    color: #fff;
+}
+
+/* Custom navigation styling */
+.custom-nav {
+    background-color: #a60033;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* Navigation Links */
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-links a i {
+    font-size: 20px;
+}
+
+/* Auth buttons */
+.auth-buttons {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+}
+
+.login-register-btn {
+    background-color: #FFD700;
+    color: black;
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    text-transform: uppercase;
+    border: none;
+}
+
+.login-register-btn i {
+    margin-right: 8px;
+    font-size: 18px;
+}
+
+.login-register-btn:hover {
+    background-color: #FFC107;
+}
+
+/* Swiper styling */
+.swiper-container {
+    width: 100%;
+    height: 600px;
+}
+
+.swiper-slide {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    text-align: center;
+    color: white;
+    position: relative;
+}
+
+.swiper-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.slide-text {
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    width: 100%;
+    padding: 30px 15px;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 40%;
+    font-size: 24px;
+}
+
+/* Swiper Pagination */
+.swiper-pagination {
+    position: absolute;
+    bottom: 100px;
+    text-align: center;
+    width: 100%;
+}
+
+/* Content section styling */
+.content-section {
+    padding: 40px;
+    margin: 20px auto;
+    max-width: 1200px;
+    background-color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.content-section h2 {
+    font-size: 32px;
+    color: #a60033;
+    text-align: center;
+}
+
+.content-section p {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-top: 15px;
+    text-align: center;
+    color: #333;
+}
+
+/* Contact Section */
+.contact-section {
+    background-color: #800020; /* Maroon background */
+    color: white; /* White text color */
+    padding: 40px;
+    margin: 20px auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.contact-section h2 {
+    text-align: center;
+}
+
+.contact-info {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.contact-info ul {
+    list-style: none;
+    padding: 0;
+}
+
+.contact-info li {
+    margin: 5px 0;
+}
+
+/* Social Media Links */
+.social-media {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.social-media a {
+    margin: 0 10px;
+    color: white; /* White color for social media links */
+    font-size: 24px;
+}
+
+.social-media a:hover {
+    color: #FFD700; /* Yellow color on hover */
+}
+
+/* Footer styling */
+footer {
+    background-color: #800020; /* Footer color */
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+}
+
+/* Games Section */
+.games-section {
+    padding: 50px 20px;
+    text-align: center;
+    background-color: #fff;
+}
+
+.games-section h2 {
+    font-size: 36px;
+    margin-bottom: 30px;
+    color: #a60033;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.games-container {
+    display: flex;
+    justify-content: space-around;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.game-card {
+    background-color: #f9c2d4; /* Filled box with a light pink color */
+    border-radius: 15px;
+    text-align: center;
+    padding: 20px;
+    width: 280px;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.game-card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.date {
+    font-size: 18px;
+    color: #a60033;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.teams {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #a60033;
+}
+
+.teams span {
+    margin: 0 10px;
+}
+
+.game-card button {
+    margin-top: 20px;
+    background-color: #FFD700; /* Yellow button for 'More' */
+    color: black;
+    font-size: 16px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 50px;
+    transition: background-color 0.3s ease;
+}
+
+.game-card button:hover {
+    background-color: #FFC107;
+    color: black;
+}
+
+/* Responsive styling */
+@media screen and (max-width: 768px) {
+    .games-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .game-card {
+        width: 100%;
+        max-width: 300px;
+    }
+}
+
+/* Styles for Login and Register */
+.login-container, .register-container {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+    background-color: #1a1a1a; /* Darker card background */
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.login-content, .register-content {
+    text-align: center;
+}
+
+.social-login {
+    margin: 20px 0;
+}
+
+.google-btn, .facebook-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+}
+
+.google-btn {
+    background-color: #db4437; /* Google Red */
+}
+
+.facebook-btn {
+    background-color: #4267B2; /* Facebook Blue */
+}
+
+input[type="email"], input[type="password"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    background-color: #333;
+    color: #fff;
+}
+
+button {
+    background-color: #00ff00; /* Bright green */
+    color: black;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #00cc00; /* Darker green on hover */
+}
+
+p {
+    margin: 10px 0;
+}
+
+a {
+    color: #00ff00; /* Bright green */
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.role-selection {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.role-btn {
+    background-color: #a60033;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+.role-btn:hover {
+    background-color: #800020;
+}
+/* Teams Section */
+.teams-container {
+    display: flex;
+    justify-content: space-around;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+.team-card {
+    background-color: #f9f9f9;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    padding: 20px;
+    width: 300px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.team-card:hover {
+    transform: scale(1.1);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+}
+
+.team-card img {
+    width: 100%;
+    height: 200px;
+    border-radius: 12px;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+.team-info h3 {
+    font-size: 24px;
+    color: #a60033;
+    margin-bottom: 10px;
+}
+
+.team-info p {
+    font-size: 16px;
+    color: #666;
+    margin: 8px 0;
+}
+/* See All Button */
+.see-all {
+    text-align: right;  /* Align it to the right like "All news" */
+    margin-top: 10px;
+    padding-right: 20px;
+}
+
+.see-all a {
+    color: #a60033;  /* Similar text color to "All news" link */
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+.see-all a:hover {
+    text-decoration: underline;  /* Underline on hover to match "All news" link */
+}
+
+/* Latest News Section */
+#latest-news {
+    background-color: #f1f1f1;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.news-container {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.news-card {
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 220px;
+}
+
+.news-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+}
+
+.news-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.news-info {
+    padding: 15px;
+}
+
+.news-info h3 {
+    font-size: 16px;
+    color: #333;
+    text-align: left;
+}
+
+.all-news-link {
+    text-align: right;
+    margin-top: 10px;
+    padding-right: 20px;
+}
+
+.all-news-link a {
+    color: #a60033;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.all-news-link a:hover {
+    text-decoration: underline;
+}
+/* Games Section */
+.games-section {
+    padding: 50px 20px;
+    text-align: center;
+    background-color: #fff;
+}
+
+.games-section h2 {
+    font-size: 36px;
+    margin-bottom: 15px;
+    color: #a60033;
+    text-transform: none;
+    letter-spacing: 1px;
+}
+
+.games-section p {
+    font-size: 18px;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+/* Games Container Styling */
+.games-container {
+    display: flex;
+    justify-content: space-around;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+/* Game Card Styling */
+.game-card {
+    background-color: #fff; /* White background */
+    border-radius: 15px;
+    text-align: center;
+    padding: 20px;
+    width: 280px;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    color: #333; /* Black text for better contrast against white background */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Add shadow to match the team section */
+}
+
+.game-card:hover {
+    transform: scale(1.05); /* Slightly scale on hover for a pop-out effect */
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3); /* Darker shadow on hover */
+}
+
+.game-card:focus,
+.game-card:active {
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3); /* Highlight shadow on focus or active state */
+    outline: none; /* Remove default outline */
+}
+
+
+/* Date Styling */
+.date {
+    font-size: 18px;
+    color: #a60033; /* Updated to maroon color to match the website */
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Teams Styling */
+.teams {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333; /* Black text for better contrast */
+}
+
+/* Button for More Details */
+.game-card button {
+    margin-top: 20px;
+    background-color: #FFD700; /* Yellow button for 'More Details' */
+    color: black;
+    font-size: 16px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 50px;
+    transition: background-color 0.3s ease;
+}
+
+.game-card button:hover {
+    background-color: #FFC107; /* Slightly darker yellow on hover */
+    color: black;
+}
+
+/* See All Button (for Games Section) */
+.see-all {
+    text-align: right;  /* Align it to the right like "All news" */
+    margin-top: 10px;
+    padding-right: 20px;
+}
+
+.see-all a {
+    color: #a60033;  /* Similar text color to "All news" link */
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+.see-all a:hover {
+    text-decoration: underline;  /* Underline on hover to match "All news" link */
+}
+/* Watch Live Section Styling */
+#watch-live {
+    padding: 40px 0;
+    background-color: #a60033; /* Maroon background to match the site theme */
+    border-radius: 20px;
+    margin: 40px auto;
+    max-width: 1200px;
+}
+
+.watch-live-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    color: #fff;
+    text-align: left;
+    padding: 0 20px;
+}
+
+.watch-live-container img {
+    width: 50%;
+    border-radius: 10px;
+}
+
+.watch-live-text {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center-aligns all elements horizontally */
+    text-align: center; /* Center the text */
+}
+
+.watch-live-text p {
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: #fff; /* White color for visibility */
+}
+
+.watch-live-text h2 {
+    font-size: 28px;
+    margin: 20px 0;
+    color: #fff; /* White color for text */
+    line-height: 1.5;
+}
+
+/* Watch Now Button */
+.watch-now-btn {
+    background-color: #FFD700; /* Yellow button */
+    color: #a60033; /* Maroon text */
+    font-size: 16px;
+    padding: 10px 20px;
+    border-radius: 50px;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+.watch-now-btn:hover {
+    background-color: #FFC107; /* Slightly darker yellow on hover */
+    color: #a60033;
+}
+/* Standings Section Styling */
+.standings-section {
+    padding: 40px 20px;
+    text-align: center;
+    background-color: #ffffff;
+    margin: 20px auto;
+    max-width: 1200px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Add shadow similar to Latest News */
+    border-radius: 15px; /* Matching the latest news card rounding */
+}
+
+.standings-section h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+    color: #a60033; /* Updated color to match theme */
+    font-weight: bold;
+}
+
+.standings-container {
+    display: flex;
+    justify-content: center; /* Align standings in the center */
+    gap: 40px; /* Updated gap to provide consistency */
+    flex-wrap: wrap;
+}
+
+.team-standing {
+    background-color: #f8f8f8; /* Light gray for consistency with Latest News cards */
+    padding: 20px;
+    border-radius: 15px;
+    width: 250px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Consistent shadow effect */
+    text-align: center;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.team-standing:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+}
+
+.team-standing img {
+    width: 80px;
+    margin-bottom: 15px;
+}
+
+.team-standing h3 {
+    font-size: 24px;
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.team-standing p {
+    font-size: 16px;
+    color: #666;
+}
+
+.medal {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #e0e0e0;
+    color: white;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.medal.gold {
+    background-color: #FFD700;
+}
+
+.medal.silver {
+    background-color: #C0C0C0;
+}
+
+.medal.bronze {
+    background-color: #CD7F32;
+}
+
+.champion {
+    border: 2px solid #FFD700;
+    padding: 20px 18px; /* Adjust padding for border */
+}
+
+/* See All Button */
+.see-all {
+    text-align: right;  /* Align it to the right like "All news" */
+    margin-top: 20px;
+    padding-right: 20px;
+}
+
+.see-all a {
+    color: #a60033;  /* Similar text color to "All news" link */
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+.see-all a:hover {
+    text-decoration: underline;  /* Underline on hover to match "All news" link */
+}
+

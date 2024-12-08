@@ -1,0 +1,108 @@
+<!-- templates/register.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <style>
+        /* General body styling for the register page */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-image: url('{{ url_for('static', filename='images/login_background.jpg') }}');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            height: 100vh;
+        }
+
+        /* Styles for the register container */
+        .register-container {
+            max-width: 450px;
+            margin: 70px auto;
+            padding: 50px;
+            background-color: rgba(26, 26, 26, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            z-index: 10;
+            color: #fff;
+        }
+
+        .register-container h1 {
+            text-align: center;
+            color: #00ff00;
+        }
+
+        input[type="text"], input[type="email"], input[type="password"], select {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            background-color: #333;
+            color: #fff;
+        }
+
+        label {
+            color: #00ff00;
+        }
+
+        button {
+            background-color: #00ff00;
+            color: black;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #00cc00;
+        }
+
+        p {
+            margin: 10px 0;
+            color: #fff;
+        }
+
+        a {
+            color: #00ff00;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <header>
+            <h1>Register</h1>
+        </header>
+        <section class="register-content">
+            <form action="{{ url_for('register') }}" method="post">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <label for="role">Role:</label>
+                <select id="role" name="role">
+                    <option value="user">User</option>
+                    <option value="admin">Admin</option>
+                </select>
+                <button type="submit">Register</button>
+            </form>
+            <p>Already have an account? <a href="{{ url_for('login') }}">Login here</a></p>
+        </section>
+    </div>
+</body>
+</html>

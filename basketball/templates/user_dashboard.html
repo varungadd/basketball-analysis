@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        /* Header styling */
+        header {
+            background-color: #a60033;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Navigation bar styling */
+        .navbar {
+            background-color: #a60033;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .navbar a {
+            color: white;
+            padding: 10px 15px; 
+            text-decoration: none;
+            font-size: 18px;
+            margin: 0 10px;
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            transition: background-color 0.3s;
+        }
+
+        .navbar a:hover {
+            background-color: #800020;
+            border-radius: 5px;
+        }
+
+        .logout-button {
+            background-color: #FFD700;
+            color: black;
+            padding: 10px 20px; 
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-left: 20px; 
+            font-size: 18px; 
+            transition: background-color 0.3s;
+        }
+
+        .logout-button:hover {
+            background-color: #FFC107;
+        }
+
+        /* Dashboard Container */
+        .dashboard-container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            text-align: left; /* Center-align the content */
+        }
+
+        h2 {
+            text-align: left;
+            color: #333;
+            font-size: 50px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .profile-info {
+            margin-bottom: 30px;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .tab {
+            margin: 0 15px;
+            padding: 10px 20px;
+            background-color: transparent;
+            color: black;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .tab:hover {
+            border-bottom: 3px solid #800020;
+        }
+
+        .active {
+            color: #800020;
+            border-bottom: 3px solid #a60033;
+        }
+
+        .results-section {
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff; /* White background */
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Shadow effect */
+        }
+
+        .results-section h3 {
+            text-align: center;
+            color: #333;
+            font-size: 30px;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            border-radius: 10px; /* Rounded corners for table */
+            overflow: hidden; /* Hide overflow */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f9c2d4; /* Light pink for header */
+            color: #333;
+        }
+
+        td {
+            background-color: #ffffff; /* White for cells */
+            border-bottom: 1px solid #ddd; /* Light gray border */
+        }
+
+        tr:hover {
+            background-color: #f1f1f1; /* Light gray on hover */
+        }
+
+        td a {
+            color: #28a745; /* Green for download links */
+            text-decoration: none; /* Remove underline */
+            font-weight: bold; /* Bold text */
+        }
+
+        td a:hover {
+            text-decoration: underline; /* Underline on hover */
+        }
+
+        @media (max-width: 768px) {
+            table, th, td {
+                display: block;
+                width: 100%;
+            }
+            
+            th, td {
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                margin-bottom: 10px; /* Space between rows */
+            }
+        }
+        /* Contact Section */
+        .contact-section {
+            background-color: #800020; /* Maroon background */
+            color: white; /* White text color */
+            padding: 40px;
+            margin: 20px auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgb(255, 255, 255);
+        }
+
+        .contact-section h2 {
+            text-align: center; /* Center the heading */
+            margin-bottom: 20px; /* Space below the heading */
+            font-size: 24px; /* Reduced font size */
+            color: white; /* Change color to white */
+        }
+
+
+        .contact-info {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .contact-info ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .contact-info li {
+            margin: 5px 0;
+            font-size: 18px; /* Font size for contact info */
+        }
+
+        /* Social Media Links */
+        .social-media {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .social-media a {
+            margin: 0 10px;
+            color: white; /* White color for social media links */
+            font-size: 24px;
+        }
+
+        .social-media a:hover {
+            color: #FFD700; /* Yellow color on hover */
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            background-color: #800020;
+            color: white;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            box-sizing: border-box;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: transparent; /* Removed background color */
+        }
+
+        .save-button {
+            background-color: #d3d3d3; /* Greyish color for Save Changes */
+            color: black;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            display: block; /* Make it block-level to center */
+            margin: 20px auto; /* Center it */
+            text-align: center; /* Center text */
+        }
+
+        .save-button:hover {
+            background-color: #c0c0c0; /* Darker grey on hover */
+        }
+      /* Settings Section Styles */
+.settings-section {
+    background-color: #ffffff; /* White background */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Shadow effect */
+    padding: 20px; /* Padding inside the section */
+    margin: 20px auto; /* Center the section */
+    max-width: 800px; /* Max width for the section */
+}
+
+.settings-section h3 {
+    text-align: left; /* Align title to the left */
+    font-size: 28px; /* Title size */
+    color: #333; /* Dark text color */
+    margin-bottom: 20px; /* Space below the title */
+    border-bottom: 2px solid #a60033; /* Underline for the title */
+    padding-bottom: 10px; /* Padding below title */
+}
+
+/* Settings Item Styles */
+.settings-item {
+    display: flex; /* Flexbox layout */
+    flex-direction: column; /* Stack items vertically */
+    padding: 15px; /* Padding inside items */
+    border: 1px solid #ddd; /* Light gray border */
+    border-radius: 8px; /* Rounded corners */
+    margin-bottom: 15px; /* Space between items */
+    background-color: #f9f9f9; /* Light background color */
+    transition: background-color 0.3s, transform 0.2s; /* Animation effects */
+}
+
+.settings-item:hover {
+    background-color: #f1f1f1; /* Light gray on hover */
+    transform: scale(1.02); /* Slight scaling effect */
+}
+
+.settings-item p {
+    margin: 0; /* Remove default margin */
+    font-size: 18px; /* Font size for item text */
+    color: #333; /* Dark text color */
+}
+
+.email-edit {
+    display: flex; /* Flexbox layout for email text and button */
+    justify-content: space-between; /* Space between text and button */
+    align-items: center; /* Center vertically */
+}
+
+.email-text {
+    flex-grow: 1; /* Allow text to grow */
+    margin-right: 10px; /* Space between text and button */
+    font-size: 16px; /* Font size for email text */
+    color: #333; /* Dark text color */
+}
+
+.settings-item button {
+    background-color: transparent; /* Transparent background */
+    color: #a60033; /* Button text color */
+    border: 2px solid #a60033; /* Red border */
+    padding: 8px 15px; /* Increased padding for button */
+    border-radius: 5px; /* Rounded corners for button */
+    cursor: pointer; /* Pointer cursor */
+    transition: background-color 0.3s, transform 0.2s; /* Animation effects */
+    font-size: 16px; /* Button font size */
+}
+
+.settings-item button:hover {
+    background-color: #a60033; /* Red background on hover */
+    color: white; /* White text on hover */
+    transform: scale(1.05); /* Slight scaling effect */
+}
+
+.edit-button {
+    background-color: transparent; /* No background */
+    border: 1px solid #a60033; /* Border color */
+    color: #a60033; /* Text color */
+    padding: 8px 12px; /* Padding for button */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor */
+    transition: background-color 0.3s, transform 0.2s; /* Animation effects */
+    font-size: 14px; /* Button font size */
+}
+
+.edit-button:hover {
+    background-color: #a60033; /* Background color on hover */
+    color: white; /* Text color on hover */
+}
+
+.edit-button i {
+    margin-right: 5px; /* Space between icon and text */
+}
+        footer {
+            text-align: center;
+            padding: 15px;
+            background-color: #800020;
+            color: white;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .settings-item {
+                flex-direction: column; /* Stack items on smaller screens */
+                align-items: flex-start;
+            }
+
+            .settings-item button {
+                margin-top: 10px; /* Space above button */
+            }
+        }
+
+        /* Favorite Teams Section */
+        .search-bar {
+            margin: 20px auto; /* Center search bar */
+            max-width: 800px; /* Max width for search */
+            display: flex; /* Flexbox for search bar */
+        }
+
+        .search-bar input[type="text"] {
+            flex: 3; /* Increase the flex ratio to make it larger */
+            padding: 15px; /* Padding for input field */
+            border: 2px solid #a60033; /* Border color */
+            border-radius: 5px 0 0 5px; /* Rounded corners */
+            outline: none; /* Remove outline */
+            font-size: 16px; /* Font size */
+            margin-right: -5px; /* Adjust margin for better alignment */
+        }
+
+        .search-bar button {
+            flex: 1; /* Set button to take less space */
+            padding: 15px 20px; /* Padding for button */
+            background-color: #a60033; /* Button color */
+            color: white; /* Button text color */
+            border: none; /* No border */
+            border-radius: 0 5px 5px 0; /* Rounded corners */
+            cursor: pointer; /* Pointer cursor */
+        }
+
+        .search-bar button:hover {
+            background-color: #800020; /* Darker color on hover */
+        }
+
+        /* Favorite Teams */
+        .favorite-teams {
+            display: flex; /* Flexbox for team info */
+            justify-content: space-between; /* Space between items */
+            flex-wrap: wrap; /* Wrap items */
+            margin-bottom: 20px; /* Space below each team info */
+        }
+
+        .team-card {
+            background-color: #f9c2d4; /* Light pink for team cards */
+            border-radius: 10px; /* Rounded corners */
+            padding: 20px; /* Padding inside card */
+            width: 30%; /* Card width */
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+            text-align: center; /* Center text */
+            margin-bottom: 20px; /* Space below each card */
+            transition: transform 0.2s; /* Smooth transition */
+            cursor: pointer; /* Pointer cursor */
+        }
+
+        .team-card:hover {
+            transform: scale(1.05); /* Scale up on hover */
+        }
+
+        .team-card img {
+            width: 100%; /* Full width for images */
+            height: auto; /* Maintain aspect ratio */
+            border-radius: 10px; /* Rounded corners for images */
+        }
+
+        .team-card h3 {
+            margin-top: 10px; /* Space above team name */
+            color: #a60033; /* Team name color */
+        }
+        .dashboard-container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    animation: fadeIn 0.5s ease-in-out; /* Fade-in animation */
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+    font-size: 50px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.upload-video {
+    text-align: center;
+    margin: 40px 0; /* Additional margin for spacing */
+}
+
+.upload-video h3 {
+    font-size: 30px;
+    margin-bottom: 20px;
+    color: #800020; /* Darker color for the title */
+}
+
+.upload-video input[type="file"] {
+    display: none; /* Hide the default file input */
+}
+
+.upload-video label {
+    display: inline-block;
+    background-color: #a60033; /* Primary color */
+    color: white;
+    padding: 15px 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.upload-video label:hover {
+    background-color: #800020; /* Darker color on hover */
+}
+
+.upload-video .file-info {
+    margin: 20px 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.upload-video .upload-button {
+    background-color: #d3d3d3; /* Greyish color */
+    color: black;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.upload-video .upload-button:hover {
+    background-color: #f9c2d4; /* Darker grey on hover */
+    transform: scale(1.05); /* Slight scaling effect */
+}
+.fixed-width-button {
+    width: 250px; /* Set desired width */
+    text-align: left;
+}
+
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Basketball Analysis</h1>
+        <p>Logged in as: {{ user.username }}</p>
+    </header>
+
+    <!-- Navigation Bar -->
+<div class="navbar">
+    <a href="{{ url_for('home') }}"><i class="fas fa-home"></i> Home</a>
+    <a href="{{ url_for('games') }}"><i class="fas fa-basketball-ball"></i> Games</a>
+    <a href="{{ url_for('teams') }}"><i class="fas fa-users"></i> Teams</a>
+    <a href="{{ url_for('standings') }}"><i class="fas fa-list-alt"></i> Standings</a>
+    <button class="logout-button" onclick="window.location.href='{{ url_for('logout') }}'"><i class="fas fa-sign-out-alt"></i> Logout</button>
+</div>
+
+    
+
+    <div class="dashboard-container">
+        <h2 style="font-size: 50px; text-align: center; color: #333; font-weight: bold; margin-bottom: 20px;">My Account</h2>
+
+        <div class="tabs">
+            <button class="tab active" onclick="showSection('profile')">Profile</button>
+            <button class="tab" onclick="showSection('favourite-teams')">Favorite Teams</button>
+            <button class="tab" onclick="showSection('favorite-players')">Favorite Players</button>
+            <button class="tab" onclick="showSection('upload-video')">Upload Video</button>
+            <button class="tab" onclick="showSection('results')">Results</button>
+            <button class="tab" onclick="showSection('settings')">Settings</button>
+        </div>
+
+        <div id="profile" class="profile-info">
+            <h3>Profile</h3>
+            <form>
+                <label for="first-name">First Name</label>
+                <input type="text" id="first-name" class="input-field" value="SETH" required>
+                
+                <label for="last-name">Surname</label>
+                <input type="text" id="last-name" class="input-field" value="PALAK" required>
+                
+                <label for="country">Country</label>
+                <input type="text" id="country" class="input-field" value="India" required>
+                
+                <label for="address">Address</label>
+                <input type="text" id="address" class="input-field" value="" required>
+                
+                <label for="city">City</label>
+                <input type="text" id="city" class="input-field" value="" required>
+                
+                <label for="postcode">Post Code</label>
+                <input type="text" id="postcode" class="input-field" value="" required>
+                
+                <label for="phone-number">Phone Number</label>
+                <input type="tel" id="phone-number" class="input-field" value="" required>
+                
+                <button type="submit" class="save-button">Save Changes</button>
+            </form>
+        </div>
+
+        <div id="favourite-teams" class="profile-info" style="display:none;">
+            <h3>Favorite Teams</h3>
+            <div class="search-bar">
+                <input type="text" placeholder="Search for a Team..." id="teamSearch">
+                <button onclick="searchTeam()">Search</button>
+            </div>
+        </div>
+    
+        <div id="favorite-players" class="profile-info" style="display:none;">
+            <h3>Favorite Players</h3>
+            <div class="search-bar">
+                <input type="text" placeholder="Search for a Player..." id="playerSearch">
+                <button onclick="searchPlayer()">Search</button>
+            </div>
+        </div>
+    
+        <div id="upload-video" class="profile-info" style="display:none;">
+            <div class="upload-video">
+                <h3>Upload Video</h3>
+                <form action="{{ url_for('upload_video') }}" method="post" enctype="multipart/form-data">
+                    <label for="file">Choose File</label>
+                    <input type="file" name="file" id="file" required>
+                    <div class="file-info">No file selected</div>
+                    <button type="submit" class="upload-button">Upload and Analyze</button>
+                </form>
+            </div>
+        </div>
+        
+
+        <div id="favorite-players" class="profile-info" style="display:none;">
+            <h3>Favorite Players</h3>
+            <p>List of favorite players goes here.</p>
+        </div>
+
+        <div id="upload-video" class="profile-info" style="display:none;">
+            <h3>Upload Video</h3>
+            <form action="{{ url_for('upload_video') }}" method="post" enctype="multipart/form-data">
+                <input type="file" name="file" required>
+                <button type="submit" class="upload-button">Upload and Analyze</button>
+            </form>
+        </div>
+
+        <div class="results-section" id="results" style="display:none;">
+            <h3>Analysis Results</h3>
+            {% if videos %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Video Name</th>
+                            <th>Upload Date</th>
+                            <th>Overall Marks</th>
+                            <th>Areas to Improve</th>
+                            <th>Download</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for video in videos %}
+                            <tr>
+                                <td>{{ video.filename }}</td>
+                                <td>{{ video.upload_date }}</td>
+                                <td>{{ video.overall_marks or 'N/A' }}</td>
+                                <td>{{ video.areas_to_improve or 'N/A' }}</td>
+                                <td>
+                                    {% if video.analyzed_filename %}
+                                        <a href="{{ url_for('static', filename='uploads/' + video.analyzed_filename) }}" download>Download</a>
+                                    {% else %}
+                                        Not Available
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>No results to display. Please upload a video.</p>
+            {% endif %}
+        </div>
+        
+
+        <div id="settings" class="profile-info" style="display:none;">
+            <h3>Settings</h3>
+    
+            <div class="settings-item">
+                <p style="display: inline-block; margin-right: 10px;">My Password</p>
+                <button class="edit-button fixed-width-button" style="margin-top: 10px;"><i class="fas fa-pencil-alt"></i> Modify My Password</button>
+
+            </div>
+    
+            <div class="settings-item">
+                <p>My Email Address</p>
+                <div class="email-edit">
+                    <button class="edit-button" style="margin-top: 10px;"><i class="fas fa-pencil-alt"></i> Modify My Email Address</button>
+                </div>
+            </div>
+    
+            <div class="settings-item toggle-preference">
+                <p style="display: inline-block; margin-top: 10px;">My Preferences</p>
+                <label>
+                    <input type="checkbox"> Hide Scores
+                </label>
+            </div>
+    
+            <div class="settings-item">
+                <p style="display: inline-block; margin-right: 10px;">Stored Data</p>
+                <button class="edit-button fixed-width-button" style="margin-top: 10px;">Download My Personal Data</button>
+            </div>
+        </div>
+    </div>
+    <!-- Contact Section -->
+    <div class="contact-section">
+        <h2>Contact Us</h2>
+        <p style="text-align: center;">If you have any questions, feel free to reach out to us:</p>
+        <div class="contact-info">
+            <ul>
+                <li>Email: nagamalt@srmist.edu.in</li>
+                <li>Phone: +91 91 76314 249</li>
+                <li>Address: SRM Nagar, Kattankulathur - 603 203, Chengalpattu District, Tamil Nadu.</li>
+            </ul>
+        </div>
+        <h3 style="text-align: center;">Follow Us</h3>
+        <div class="social-media">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.instagram.com/srm_basketball?igsh=MTRzeDE0emE5MGl1ZA=="><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2024 Basketball Analysis Tool</p>
+    </footer>
+
+    
+
+    <script>
+        function showSection(section) {
+            const sections = ['profile', 'favourite-teams', 'favorite-players', 'upload-video', 'results', 'settings'];
+            sections.forEach(s => {
+                document.getElementById(s).style.display = 'none';
+            });
+            document.getElementById(section).style.display = 'block';
+
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+                tab.style.color = "black";
+            });
+            tabs.forEach(tab => {
+                if (tab.getAttribute('onclick').includes(section)) {
+                    tab.classList.add('active');
+                    tab.style.color = "#800020";
+                }
+            });
+        }
+        showSection('profile');
+    </script>
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!-- templates/login.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <style>
+        /* General body styling for the login page */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-image: url('{{ url_for('static', filename='images/login_background.jpg') }}'); /* Path to your image */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            height: 100vh;
+        }
+
+        /* Styles for the login container */
+        .login-container {
+            max-width: 450px;
+            margin: 70px auto;
+            padding: 50px;
+            background-color: rgba(26, 26, 26, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            z-index: 10;
+            color: #fff;
+        }
+
+        .login-container h1 {
+            text-align: center;
+            color: #00ff00;
+        }
+
+        .login-content h2 {
+            text-align: center;
+            color: #fff;
+        }
+
+        .social-login {
+            margin: 20px 0;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .google-btn, .facebook-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            color: white;
+            flex: 1;
+            margin: 0 5px;
+        }
+
+        .google-btn {
+            background-color: #db4437;
+        }
+
+        .facebook-btn {
+            background-color: #4267B2;
+        }
+
+        input[type="text"], input[type="password"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            background-color: #333;
+            color: #fff;
+        }
+
+        label {
+            color: #00ff00;
+        }
+
+        button {
+            background-color: #00ff00;
+            color: black;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #00cc00;
+        }
+
+        p {
+            margin: 10px 0;
+            color: #fff;
+        }
+
+        a {
+            color: #00ff00;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <header>
+            <h1>Login</h1>
+        </header>
+        <section class="login-content">
+            <h2>Access Your Dashboard</h2>
+            <div class="social-login">
+                <button class="google-btn">Connect with Google</button>
+                <button class="facebook-btn">Connect with Facebook</button>
+            </div>
+            <form action="{{ url_for('login') }}" method="POST">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <button type="submit">Login</button>
+            </form>
+            <p><a href="#">Forgot password?</a></p>
+            <p>Don't have an account? <a href="{{ url_for('register') }}" id="signup-link">Sign Up</a></p>
+        </section>
+    </div>
+
+    <!-- Flash messages for errors -->
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul style="color: red;">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}

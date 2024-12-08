@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Australia - Basketball Shooting Analysis</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f5f5f5; /* Light background */
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        /* Header styling */
+        header {
+            position: relative;
+            background-image: url('{{ url_for('static', filename='images/australia-background.jpg') }}');
+            background-size: cover; /* Ensure the image covers the entire header */
+            background-repeat: no-repeat; /* Prevent the image from repeating */
+            background-position: center; /* Center the image */
+            padding: 40px 0; /* Adjusted padding for top and bottom */
+            text-align: center;
+            height: 350px; /* Set a fixed height for the header */
+        }
+
+        header h1 {
+            margin: 0; /* No margin for header */
+            font-size: 48px; /* Increased font size */
+            color: rgba(255, 255, 255, 0.9); /* Darker white for title */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Shadow for better visibility */
+        }
+
+        /* Navigation bar styling */
+        .navbar {
+            background-color: transparent; /* Transparent background */
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .navbar a {
+            color: white;
+            padding: 10px 15px; 
+            text-decoration: none;
+            font-size: 18px;
+            margin: 0 10px;
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            transition: background-color 0.3s;
+        }
+
+        .navbar a i {
+            font-size: 24px; 
+        }
+
+        .navbar a:hover {
+            background-color: rgba(255, 255, 255, 0.2); /* Light hover effect */
+            border-radius: 5px;
+        }
+
+        .content-section {
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 1200px; /* Max width for content */
+            background-color: #ffffff; /* White background for content */
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Shadow */
+        }
+
+        footer {
+            text-align: center; /* Center footer text */
+            padding: 15px; /* Padding for footer */
+            background-color: #800020; /* Footer color */
+            color: white; /* Footer text color */
+        }
+
+        .team-info {
+            text-align: center;
+        }
+
+        .team-info h2 {
+            margin: 10px 0;
+        }
+
+        .team-info .rank {
+            font-size: 16px;
+            color: #fff;
+            background-color: #FFD700;
+            padding: 5px 10px;
+            border-radius: 5px;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .leaders {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        .leader {
+            text-align: center;
+            background-color: #fcfcfc; /* Light background for leader cards */
+            border-radius: 15px; /* Slightly increased border-radius for softer corners */
+            padding: 20px; /* Increased padding for better spacing */
+            width: 30%; /* Card width */
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+        }
+
+        .leader:hover {
+            transform: translateY(-5px); /* Lift effect on hover */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+        }
+
+        .leader img {
+            border-radius: 70%;
+            width: 150px; /* Increased size for leader images */
+            height: 150px; /* Increased size for leader images */
+            margin-bottom: 10px; /* Spacing between image and text */
+        }
+
+        .roster {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); /* Smaller cards */
+            gap: 10px; /* Adjust gap between cards */
+            padding: 30px; /* Padding around the roster section */
+
+        }
+
+        .roster-card {
+            background-color: #fbf7f8; /* Maroon background for cards */
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Shadow for card */
+            transition: transform 0.3s ease; /* Transition effect */
+            position: relative; /* Position for absolute elements */
+            text-align: center; /* Center text */
+            overflow: hidden; /* Ensure content doesn't overflow */
+            color: white; /* Text color */
+        }
+        .roster-card img {
+    border-radius: 70%; /* Make the image circular */
+    width: 150px; /* Adjust size as needed */
+    height: 150px; /* Maintain aspect ratio */
+    object-fit: cover; /* Ensure the image covers the area without stretching */
+    margin: 10px 0; /* Add margin for spacing */
+}
+
+
+        .roster-card:hover {
+            transform: translateY(-5px); /* Slight lift effect on hover */
+        }
+
+        .roster-header {
+            background-color: #a60033; /* Maroon color for header */
+            color: white; /* White text */
+            padding: 5px; /* Padding for header */
+            border-radius: 0 0 10px 10px; /* Round bottom corners */
+        }
+
+        .number {
+            font-size: 35px; /* Font size for numbers */
+            font-weight: bold; /* Bold font for numbers */
+            display: block; /* Display as block */
+            margin-bottom: 5px; /* Space below number */
+            align-items: left;
+        }
+        .photo-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); /* Responsive grid with fixed min width */
+    gap: 10px; /* Space between boxes */
+}
+
+.photo-box {
+    background-color: #fbf7f8; /* Light background for the box */
+    border-radius: 10px; /* Rounded corners for the box */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    overflow: hidden; /* Prevent overflow */
+    position: relative; /* Position for overlay text if needed */
+}
+
+.photo-box img {
+    width: 100%; /* Make the image take full width */
+    height: 150px; /* Fixed height for uniformity */
+    object-fit: cover; /* Ensure the image covers the area without stretching */
+    border-radius: 10px; /* Match border radius with the box */
+}
+
+.photo-caption {
+    position: absolute; /* Position for caption overlay */
+    bottom: 0; /* Align to the bottom of the box */
+    left: 0; /* Align to the left of the box */
+    right: 0; /* Align to the right of the box */
+    background: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+    color: white; /* White text */
+    padding: 5px; /* Padding for caption */
+    text-align: center; /* Center text */
+
+}
+.see-more {
+    text-align: center; /* Center the button */
+    margin-left: 550px; /* Add some space above the button */
+}
+
+.see-more-button {
+    display: inline-block; /* Inline block for padding */
+    padding: 10px 20px; /* Padding for the button */
+    background-color: #a60033; /* Background color */
+    color: white; /* Text color */
+    text-decoration: none; /* Remove underline */
+    border-radius: 5px; /* Rounded corners */
+    transition: background-color 0.3s; /* Smooth transition */
+}
+
+.see-more-button:hover {
+    background-color: #800020; /* Darker shade on hover */
+}
+
+
+
+
+
+
+
+        .tab {
+            background-color: #fff; /* White for tabs */
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 0 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            color: #a60033; /* Tab color */
+        }
+
+        .active-tab {
+            background-color: #FFD700; /* Active tab color */
+            color: black; /* Active tab text color */
+        }
+    </style>
+</head>
+<body>
+    
+    <header>
+        <div style="padding: 40px; text-align: center;">
+            <h1 style="margin: 0; color: white;">Australia</h1>
+        </div>
+        <nav class="navbar">
+            <a href="{{ url_for('home') }}" style="color: white;"><i class="fas fa-home"></i> Home</a>
+            <a href="{{ url_for('games') }}" style="color: white;"><i class="fas fa-basketball-ball"></i> Games</a>
+            <a href="{{ url_for('teams') }}" style="color: white;"><i class="fas fa-users"></i> Teams</a>
+            <a href="{{ url_for('standings') }}" style="color: white;"><i class="fas fa-list-alt"></i> Standings</a>
+        </nav>
+    </header>
+    
+    <section class="content-section team-info">
+        <h2>Overview</h2>
+        <div>
+            <span class="rank">4th World Rank</span>
+            <p>Win/Loss: 6/0</p>
+            <p>Position: 1st</p>
+        </div>
+        <h2>Last Game</h2>
+        <p><strong>Final Score: AUS 96 - 33 NZL</strong></p>
+    </section>
+
+    <section class="content-section">
+        <h2>Leaders</h2>
+        <div class="leaders">
+            <div class="leader">
+                <img src="{{ url_for('static', filename='images/jack-whitbourn.jpg') }}" alt="Jack Whitbourn">
+                <h3>Jack Whitbourn</h3>
+                <p>Efficiency: 17.8</p>
+            </div>
+            <div class="leader">
+                <img src="{{ url_for('static', filename='images/jacob-furphy.jpg') }}" alt="Jacob Furphy">
+                <h3>Jacob Furphy</h3>
+                <p>Points: 16.8</p>
+            </div>
+            <div class="leader">
+                <img src="{{ url_for('static', filename='images/emmett-adair.jpg') }}" alt="Emmett Adair">
+                <h3>Emmett Adair</h3>
+                <p>Rebounds: 11.0</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <h2>Roster</h2>
+        <div class="roster">
+            <div class="roster-card">
+                <img src="{{ url_for('static', filename='images/ben-waller.jpg') }}" alt="Ben Waller">
+                <div class="roster-header">
+                    <span class="number">8</span>
+                    <h3>Ben Waller</h3>
+                    <p>Forward</p>
+                </div>
+            </div>
+            <div class="roster-card">
+                <img src="{{ url_for('static', filename='images/dash-daniels.jpg') }}" alt="Dash Daniels">
+                <div class="roster-header">
+                    <span class="number">9</span>
+                    <h3>Dash Daniels</h3>
+                    <p>Point Guard</p>
+                </div>
+            </div>
+            <div class="roster-card">
+                <img src="{{ url_for('static', filename='images/jacob-furphy.jpg') }}" alt="Jacob Furphy">
+                <div class="roster-header">
+                    <span class="number">10</span>
+                    <h3>Jacob Furphy</h3>
+                    <p>Guard</p>
+                </div>
+            </div>
+            <div class="roster-card">
+                <img src="{{ url_for('static', filename='images/che-brogan.jpg') }}" alt="Che Dean Miller Brogan">
+                <div class="roster-header">
+                    <span class="number">11</span>
+                    <h3>Che Dean Miller</h3>
+                    <p>Small Forward</p>
+                </div>
+            </div>
+            <div class="roster-card">
+                <img src="{{ url_for('static', filename='images/luke-fennell.jpg') }}" alt="Luke Fennell">
+                <div class="roster-header">
+                    <span class="number">12</span>
+                    <h3>Luke Fennell</h3>
+                    <p>Guard</p>
+                </div>
+            </div>
+            <div class="roster-card">
+                <img src="{{ url_for('static', filename='images/nash-walker.jpg') }}" alt="Nash Walker">
+                <div class="roster-header">
+                    <span class="number">13</span>
+                    <h3>Nash Walker</h3>
+                    <p>Guard</p>
+                </div>
+            </div>
+            <div class="roster-card">
+                <img src="{{ url_for('static', filename='images/emmett-adair.jpg') }}" alt="Emmett Adair">
+                <div class="roster-header">
+                    <span class="number">14</span>
+                    <h3>Emmett Adair</h3>
+                    <p>Forward</p>
+                </div>
+            </div>
+            <div class="roster-card">
+                <img src="{{ url_for('static', filename='images/goc-malual.jpg') }}" alt="Goc Malual">
+                <div class="roster-header">
+                    <span class="number">15</span>
+                    <h3>Goc Malual</h3>
+                    <p>Forward</p>
+                </div>
+            </div>
+            <div class="roster-card">
+                <img src="{{ url_for('static', filename='images/jack-whitbourn.jpg') }}" alt="Jack Whitbourn">
+                <div class="roster-header">
+                    <span class="number">16</span>
+                    <h3>Jack Whitbourn</h3>
+                    <p>Center</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <h2>Videos</h2>
+        <p>Highlights and game footage.</p>
+    </section>
+
+    <section class="content-section">
+        <h2>News</h2>
+        <p>Latest updates and articles related to Team 1.</p>
+    </section>
+
+    <section class="content-section">
+        <h2>Photos</h2>
+        <p>Gallery of images featuring Australia.</p>
+        <div class="photo-gallery">
+            <div class="photo-box">
+                <img src="{{ url_for('static', filename='images/image1.jpg') }}" alt="Image 1">
+            </div>
+            <div class="photo-box">
+                <img src="{{ url_for('static', filename='images/image2.jpg') }}" alt="Image 2">
+            </div>
+            <div class="photo-box">
+                <img src="{{ url_for('static', filename='images/image3.jpg') }}" alt="Image 3">
+            </div>
+            <div class="photo-box">
+                <img src="{{ url_for('static', filename='images/image4.jpg') }}" alt="Image 4">
+            </div>
+            <div class="photo-box">
+                <img src="{{ url_for('static', filename='images/image5.jpg') }}" alt="Image 5">
+            </div>
+            <div class="photo-box">
+                <img src="{{ url_for('static', filename='images/image6.jpg') }}" alt="Image 6">
+            </div>
+            <div class="photo-box">
+                <img src="{{ url_for('static', filename='images/image7.jpg') }}" alt="Image 7">
+            </div>
+            <div class="photo-box">
+                <img src="{{ url_for('static', filename='images/image8.jpg') }}" alt="Image 8">
+            </div>
+            <div class="photo-box">
+                <img src="{{ url_for('static', filename='images/image9.jpg') }}" alt="Image 9">
+            </div>
+            <div class="photo-box">
+                <img src="{{ url_for('static', filename='images/image10.jpg') }}" alt="Image 10">
+            </div>
+            <div class="see-more">
+                <a href="https://www.google.com/images" class="see-more-button">See More</a>
+            </div>
+        
+    </section>
+    
+    
+    
+    
+
+    <section class="contact-section">
+        <h2>Contact Us</h2>
+        <div style="text-align: center;"> <!-- Centering the paragraph -->
+            <p>If you have any questions, feel free to reach out to us:</p>
+        </div>
+        <div class="contact-info">
+            <ul style="text-align: center;"> <!-- Centering the list -->
+                <li>Email: info@basketballanalysis.com</li>
+                <li>Phone: +1 234 567 890</li>
+                <li>Address: 123 Basketball Ave, Court City, CA 12345</li>
+            </ul>
+        </div>
+        <h3 style="text-align: center;">Follow Us</h3> <!-- Centering the heading -->
+        <div class="social-media" style="text-align: center;"> <!-- Centering the social media links -->
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+    </section>
+    
+    <footer>
+        © 2024 Basketball Shooting Analysis Tool
+    </footer>
+</body>
+</html>

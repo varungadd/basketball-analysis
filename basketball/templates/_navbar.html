@@ -1,0 +1,17 @@
+<nav class="custom-nav">
+    <ul class="nav-links">
+        <li><a href="{{ url_for('home') }}"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="{{ url_for('games') }}"><i class="fas fa-basketball-ball"></i> Games</a></li>
+        <li><a href="{{ url_for('teams') }}"><i class="fas fa-users"></i> Teams</a></li>
+        <li><a href="{{ url_for('standings') }}"><i class="fas fa-list-alt"></i> Standings</a></li>
+    </ul>
+    {% if 'username' in session %}
+    <div class="auth-buttons">
+        <a href="{{ url_for('logout') }}" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </div>
+    {% else %}
+    <div class="auth-buttons">
+        <a href="{{ url_for('login') }}" class="login-register-btn"><i class="fas fa-user"></i> Login/Register</a>
+    </div>
+    {% endif %}
+</nav>

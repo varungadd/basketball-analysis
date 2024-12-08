@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basketball Shooting Analysis</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    {% include '_navbar.html' %}
+    <header>
+        <div class="date-time">
+            <p id="current-date"></p>
+        </div>
+    </header>
+    
+    <section class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <img src="{{ url_for('static', filename='images/australia-win.jpg') }}" alt="Australia Wins">
+                <div class="slide-text">
+                    <h2>Australia wins second FIBA U18 Asia Cup title</h2>
+                    <p>Australia secured their second title in a thrilling final against New Zealand.</p>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <img src="{{ url_for('static', filename='images/new-zealand.jpg') }}" alt="New Zealand Qualifies">
+                <div class="slide-text">
+                    <h2>New Zealand heads to FIBA U19 World Cup</h2>
+                    <p>New Zealand qualifies for the FIBA U19 World Cup in 2025 after an intense playoff.</p>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <img src="{{ url_for('static', filename='images/china-third.jpg') }}" alt="China Finishes Third">
+                <div class="slide-text">
+                    <h2>China finishes third at FIBA U18 Asia Cup</h2>
+                    <p>China claims third place after a stunning victory over Jordan in the bronze match.</p>
+                </div>
+            </div>
+        </div>
+        <div class="swiper-pagination"></div>
+    </section>
+
+    <section id="home" class="content-section">
+        <h2>"Beyond the Arc: Master Your Game, Perfect Your Shot"</h2>
+        <p>Unlock your full potential on the court with our state-of-the-art performance analysis tools. Whether you’re an aspiring athlete or a seasoned player, we offer in-depth insights to refine your shooting techniques, enhance your game strategy, and boost overall performance. Stay up-to-date with the latest game schedules, team standings, and basketball news. Join us and take your basketball journey to new heights with personalized feedback and cutting-edge technology. Let’s elevate your game together!.</p>
+    </section>
+
+    <section id="teams" class="content-section">
+        <h2>Teams</h2>
+        <div class="teams-container">
+            <div class="team-card">
+                <img src="{{ url_for('static', filename='images/team1.jpg') }}" alt="Team 1">
+                <div class="team-info">
+                    <h3>U25 Team</h3>
+                    <p>Location: Chennai</p>
+                    <p>Wins: 10 | Losses: 2</p>
+                </div>
+            </div>
+            <div class="team-card">
+                <img src="{{ url_for('static', filename='images/team2.jpg') }}" alt="Team 2">
+                <div class="team-info">
+                    <h3>U18 Team</h3>
+                    <p>Location: Chennai</p>
+                    <p>Wins: 8 | Losses: 4</p>
+                </div>
+            </div>
+            <div class="team-card">
+                <img src="{{ url_for('static', filename='images/team3.jpg') }}" alt="Team 3">
+                <div class="team-info">
+                    <h3>Junior Varsity</h3>
+                    <p>Location: Chennai</p>
+                    <p>Wins: 12 | Losses: 0</p>
+                </div>
+            </div>
+        </div>
+        <div class="see-all">
+            <a href="{{ url_for('teams') }}">See All</a> <!-- Link updated to teams.html -->
+        </div>
+    </section>
+    
+
+    <section id="games" class="content-section games-section">
+        <h2>Game Schedule</h2>
+        <p>Explore the upcoming matches and stay up to date with the latest fixtures of your favorite teams. Get ready to witness some thrilling action on the court!</p>
+        <div class="games-container">
+            <div class="game-card">
+                <div class="date">Mon 02 SEP 2024</div>
+                <div class="teams">
+                    <span>JV</span> vs <span>U25</span>
+                </div>
+                <button>More Details</button>
+            </div>
+            <div class="game-card">
+                <div class="date">Tue 03 SEP 2024</div>
+                <div class="teams">
+                    <span>U25</span> vs <span>U18</span>
+                </div>
+                <button>More Details</button>
+            </div>
+            <div class="game-card">
+                <div class="date">Wed 04 SEP 2024</div>
+                <div class="teams">
+                    <span>U18</span> vs <span>JV</span>
+                </div>
+                <button>More Details</button>
+            </div>
+        </div>
+        <div class="see-all">
+            <a href="{{ url_for('games') }}">See All</a> <!-- Link updated to games.html -->
+        </div>
+    </section>
+    
+
+    <section id="latest-news" class="content-section">
+        <h2>Latest News</h2>
+        <div class="news-container">
+            <div class="news-card">
+                <a href="https://www.google.com/search?q=Qualifying+for+U19+World+Cup+a+big+achievement+for+Jordan+basketball" target="_blank">
+                    <img src="{{ url_for('static', filename='images/news1.jpg') }}" alt="News 1">
+                    <div class="news-info">
+                        <h3>Qualifying for U19 World Cup "a big achievement" for Jordan basketball</h3>
+                    </div>
+                </a>
+            </div>
+            <div class="news-card">
+                <a href="https://www.google.com/search?q=Emmett+Adair+named+MVP+headlines+All-Star+Five" target="_blank">
+                    <img src="{{ url_for('static', filename='images/news2.jpg') }}" alt="News 2">
+                    <div class="news-info">
+                        <h3>Emmett Adair named MVP, headlines All-Star Five</h3>
+                    </div>
+                </a>
+            </div>
+            <div class="news-card">
+                <a href="https://www.google.com/search?q=Australia+win+second+FIBA+U18+Asia+Cup+title" target="_blank">
+                    <img src="{{ url_for('static', filename='images/news3.jpg') }}" alt="News 3">
+                    <div class="news-info">
+                        <h3>Australia win second FIBA U18 Asia Cup title</h3>
+                    </div>
+                </a>
+            </div>
+            <div class="news-card">
+                <a href="https://www.google.com/search?q=Australia+wallop+New+Zealand+for+second+U18+Asia+Cup+title" target="_blank">
+                    <img src="{{ url_for('static', filename='images/news4.jpg') }}" alt="News 4">
+                    <div class="news-info">
+                        <h3>Australia wallop New Zealand for second U18 Asia Cup title</h3>
+                    </div>
+                </a>
+            </div>
+            <div class="news-card">
+                <a href="https://www.google.com/search?q=China+stamp+class+on+Jordan+take+home+third+straight+bronze" target="_blank">
+                    <img src="{{ url_for('static', filename='images/news5.jpg') }}" alt="News 5">
+                    <div class="news-info">
+                        <h3>China stamp class on Jordan, take home third straight bronze</h3>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="all-news-link">
+            <a href="https://www.google.com/search?q=latest+basketball+news" target="_blank">All news &rarr;</a>
+        </div>
+    </section>
+
+    <section id="watch-live" class="content-section">
+        <div class="watch-live-container">
+            <img src="{{ url_for('static', filename='images/stadium.jpg') }}" alt="Basketball Stadium">
+            <div class="watch-live-text">
+                <p>INSTAGRAM</p>
+                <h2>Watch all games live for free and engage with our Instagram community</h2>
+                <a href="https://www.instagram.com/srm_basketball?igsh=MTRzeDE0emE5MGl1ZA==" class="watch-now-btn" target="_blank">WATCH NOW &rarr;</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="standings" class="standings-section content-section">
+        <h2>Standings</h2>
+        <div class="standings-container">
+            <div class="team-standing">
+                <span class="medal silver">2</span>
+                <img src="{{ url_for('static', filename='images/nz-flag.png') }}" alt="New Zealand Flag">
+                <h3>New Zealand</h3>
+                <p>Win/Loss: 5/1</p>
+            </div>
+            <div class="team-standing champion">
+                <span class="medal gold">1</span>
+                <img src="{{ url_for('static', filename='images/aus-flag.png') }}" alt="Australia Flag">
+                <h3>Australia</h3>
+                <p>Win/Loss: 6/0</p>
+            </div>
+            <div class="team-standing">
+                <span class="medal bronze">3</span>
+                <img src="{{ url_for('static', filename='images/china-flag.png') }}" alt="China Flag">
+                <h3>China</h3>
+                <p>Win/Loss: 5/1</p>
+            </div>
+        </div>
+        <div class="see-all">
+            <a href="{{ url_for('standings') }}">All Details &rarr;</a> <!-- Link updated to standings.html -->
+        </div>
+    </section>
+    
+
+    <section class="contact-section">
+        <h2>Contact Us</h2>
+        <p style="text-align: center;">If you have any questions, feel free to reach out to us:</p>
+        <div class="contact-info" style="text-align: center;">
+            <ul>
+                <li>Email: nagamalt@srmist.edu.in</li>
+                <li>Phone: +91 91 76314 249</li>
+                <li>Address: SRM Nagar, Kattankulathur - 603 203, Chengalpattu District, Tamil Nadu.</li>
+            </ul>
+        </div>
+        <h3 style="text-align: center;">Follow Us</h3>
+        <div class="social-media" style="text-align: center;">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.instagram.com/srm_basketball?igsh=MTRzeDE0emE5MGl1ZA==" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2024 Basketball Shooting Analysis Tool</p>
+    </footer>
+
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+    <script>
+        const swiper = new Swiper('.swiper-container', {
+            loop: true,
+            autoplay: {
+                delay: 5000,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+        });
+
+        // Date and time script
+        function updateDateTime() {
+            const dateElement = document.getElementById('current-date');
+            const now = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
+            const dateTimeString = now.toLocaleDateString('en-US', options);
+            dateElement.innerText = dateTimeString;
+        }
+        setInterval(updateDateTime, 1000);
+        updateDateTime(); // Initial call
+    </script>
+</body>
+</html>

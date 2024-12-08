@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ player.username }}'s Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        /* Header styling */
+        header {
+            background-color: #a60033;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+       /* Player info section */
+       .player-info {
+        background-color: #fdfdfd; /* Baby pink color */
+        color: rgb(0, 0, 0);
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border-radius: 0; /* Remove border radius for full width */
+        margin: 0; /* Remove margin to eliminate white space */
+        width: 100vw; /* Set width to 100% of viewport width */
+        position: relative; /* Position relative for better control */
+        left: 50%; /* Center it */
+        transform: translateX(-50%); /* Shift it back to center */
+}
+
+
+        .player-info img {
+            width: 200px; /* Adjust based on your preference */
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+        .player-info h3 {
+            font-size: 24px;
+            margin: 0;
+        }
+
+        .player-info p {
+            margin: 5px 0;
+        }
+
+        /* Navigation bar styling */
+        .navbar {
+            background-color: #a60033;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .navbar a {
+            color: white;
+            padding: 10px 15px; 
+            text-decoration: none;
+            font-size: 18px;
+            margin: 0 10px;
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            transition: background-color 0.3s;
+        }
+
+        .navbar a:hover {
+            background-color: #800020;
+            border-radius: 5px;
+        }
+
+        .logout-button {
+            background-color: #FFD700;
+            color: black;
+            padding: 10px 20px; 
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-left: 20px; 
+            font-size: 18px; 
+            transition: background-color 0.3s;
+        }
+
+        .logout-button:hover {
+            background-color: #FFC107;
+        }
+
+        /* Dashboard Container */
+        .dashboard-container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            text-align: center; /* Center-align the content */
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            font-size: 50px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .chart-container {
+            display: flex;
+            justify-content: center; /* Center the chart */
+            align-items: center; /* Center vertically */
+            width: 100%;
+            height: 400px; 
+        }
+
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .table th, .table td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f9c2d4; /* Light pink for header */
+            color: #333;
+        }
+
+        /* Button styling */
+.btn {
+    display: inline-block;
+    padding: 10px 15px; /* Adjust padding */
+    background-color: #28a745; /* Green background */
+    color: white; /* White text */
+    text-decoration: none;
+    border-radius: 5px; /* Rounded corners */
+    transition: background-color 0.3s, transform 0.3s; /* Transition effects */
+}
+
+.btn:hover {
+    background-color: #218838; /* Darker green on hover */
+    transform: scale(1.05); /* Slightly larger on hover */
+}
+
+        .badge {
+            background-color: #ffc107;
+            color: #333;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .tab {
+            margin: 0 15px;
+            padding: 10px 20px;
+            background-color: transparent;
+            color: black;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .tab:hover {
+            border-bottom: 3px solid #800020;
+        }
+
+        .active {
+            color: #800020;
+            border-bottom: 3px solid #a60033;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background-color: #800020; /* Maroon background */
+            color: white; /* White text color */
+            padding: 40px;
+            margin: 20px auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgb(255, 255, 255);
+        }
+
+        .contact-section h2 {
+            text-align: center; /* Center the heading */
+            margin-bottom: 20px; /* Space below the heading */
+            font-size: 24px; /* Reduced font size */
+            color: white; /* Change color to white */
+        }
+
+
+        .contact-info {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .contact-info ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .contact-info li {
+            margin: 5px 0;
+            font-size: 18px; /* Font size for contact info */
+        }
+
+        /* Social Media Links */
+        .social-media {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .social-media a {
+            margin: 0 10px;
+            color: white; /* White color for social media links */
+            font-size: 24px;
+        }
+
+        .social-media a:hover {
+            color: #FFD700; /* Yellow color on hover */
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            background-color: #800020;
+            color: white;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Basketball Analysis</h1>
+    </header>
+
+     <!-- Navigation Bar -->
+     <div class="navbar">
+        <a href="{{ url_for('home') }}"><i class="fas fa-home"></i> Home</a>
+        <a href="{{ url_for('games') }}"><i class="fas fa-basketball-ball"></i> Games</a>
+        <a href="{{ url_for('teams') }}"><i class="fas fa-users"></i> Teams</a>
+        <a href="{{ url_for('standings') }}"><i class="fas fa-list-alt"></i> Standings</a>
+        <button class="logout-button" onclick="window.location.href='{{ url_for('logout') }}'"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    </div>
+
+    <div class="player-info">
+        <img src="{{ url_for('static', filename='images/jack_taylor.jpg') }}" alt="Jack Taylor's Image">
+        <h3>{{ player.username }}</h3>
+        <p>#{{ player.jersey_number }}</p>
+        <p>Position: {{ player.position }}</p>
+        <p>Date of Birth: {{ player.date_of_birth }}</p>
+    </div>
+
+    <div class="dashboard-container">
+        <h2 class="dashboard-title">{{ player.username }}'s Dashboard</h2>
+
+        <div class="tabs">
+            <button class="tab active" onclick="showSection('statistics')">Statistics</button>
+            <button class="tab" onclick="showSection('videos')">Videos</button>
+        </div>
+        
+
+        <!-- Visualization Section -->
+        <div id="statistics" class="section">
+            <div class="row" id="chartsSection">
+                <div class="col-lg-6 col-md-12 mb-4">
+                    <div class="card" id="overallPerformanceCard">
+                        <div class="card-body">
+                            <h5 class="card-title text-center" style="font-size: 24px;">Overall Performance</h5>
+                            <div class="chart-container">
+                                <canvas id="performanceChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12 mb-4">
+                    <div class="card" id="areasToImproveCard">
+                        <div class="card-body">
+                            <h5 class="card-title text-center" style="font-size: 24px;">Areas to Improve</h5>
+                            <div class="chart-container">
+                                <canvas id="improvementChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Video List -->
+        <div id="videos" class="section" style="display:none;">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 class="mb-3" style="font-size: 24px;">Uploaded Videos</h3>
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>Video</th>
+                                <th>Upload Date</th>
+                                <th>Overall Marks</th>
+                                <th>Areas to Improve</th>
+                                <th>Analyzed Video</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for video in videos %}
+                            <tr data-video-marks='{{ (video.marks or {}) | tojson }}'
+                                data-video-improvements='{{ (video.improvements or {}) | tojson }}'>
+                                <td>{{ video.filename }}</td>
+                                <td>{{ video.upload_date.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                                <td>{{ video.overall_marks if video.overall_marks else 'N/A' }}</td>
+                                <td>{{ video.areas_to_improve if video.areas_to_improve else 'N/A' }}</td>
+                                <!-- Replace the existing 'View' button code with this -->
+<td>
+    {% if video.analyzed_filename %}
+    <a href="{{ url_for('static', filename='uploads/' + video.analyzed_filename) }}" target="_blank" class="btn view-button">
+        View
+    </a>
+    {% else %}
+    <span class="badge">Processing...</span>
+    {% endif %}
+</td>
+
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Contact Section -->
+    <div class="contact-section">
+        <h2>Contact Us</h2>
+        <p style="text-align: center;">If you have any questions, feel free to reach out to us:</p>
+        <div class="contact-info">
+            <ul>
+                <li>Email: nagamalt@srmist.edu.in</li>
+                <li>Phone: +91 91 76314 249</li>
+                <li>Address: SRM Nagar, Kattankulathur - 603 203, Chengalpattu District, Tamil Nadu.</li>
+            </ul>
+        </div>
+        <h3 style="text-align: center;">Follow Us</h3>
+        <div class="social-media">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.instagram.com/srm_basketball?igsh=MTRzeDE0emE5MGl1ZA=="><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2024 Basketball Analysis Tool</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // JavaScript to handle the section display
+function showSection(section) {
+    const sections = document.querySelectorAll('.section');
+    const tabs = document.querySelectorAll('.tab');
+    
+    // Hide all sections
+    sections.forEach(s => {
+        s.style.display = 'none';
+    });
+
+    // Reset all tabs to default state
+    tabs.forEach(tab => {
+        tab.classList.remove('active'); // Remove active class from all tabs
+        tab.style.color = 'black'; // Reset text color
+        tab.style.borderBottom = '3px solid transparent'; // Reset border
+    });
+
+    // Show the selected section
+    document.getElementById(section).style.display = 'block';
+
+    // Set the clicked tab to active state
+    const activeTab = document.querySelector(`button[onclick="showSection('${section}')"]`);
+    activeTab.classList.add('active');
+    activeTab.style.color = '#800020'; // Change text color to maroon
+    activeTab.style.borderBottom = '3px solid #a60033'; // Add bottom border for active tab
+}
+
+
+        const performanceChartCtx = document.getElementById('performanceChart').getContext('2d');
+        const improvementChartCtx = document.getElementById('improvementChart').getContext('2d');
+
+        let performanceChart, improvementChart;
+
+        // Function to update charts
+        function updateCharts(marks, improvements) {
+            const performanceData = [
+                marks.feet || 0,
+                marks.elbow || 0,
+                marks.jump || 0,
+                marks.follow || 0,
+                marks.trajectory || 0
+            ];
+
+            const improvementData = [
+                improvements["Feet Alignment"] || 0,
+                improvements["Elbow Alignment"] || 0,
+                improvements["Jump Shot"] || 0,
+                improvements["Follow Through"] || 0,
+                improvements["Ball Trajectory"] || 0
+            ];
+
+            // Update Performance Chart
+if (performanceChart) {
+    performanceChart.destroy();
+}
+performanceChart = new Chart(performanceChartCtx, {
+    type: 'radar',
+    data: {
+        labels: ['Feet', 'Elbow', 'Jump', 'Follow', 'Trajectory'],
+        datasets: [{
+            label: 'Performance',
+            data: performanceData,
+            backgroundColor: 'rgba(0, 123, 255, 0.3)', // Adjusted transparency
+            borderColor: '#007bff',
+            borderWidth: 2,
+            pointBackgroundColor: '#007bff', // Points color
+            pointBorderColor: '#fff', // Point border color
+            pointHoverBackgroundColor: '#fff', // Point hover background color
+            pointHoverBorderColor: '#007bff', // Point hover border color
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            r: {
+                beginAtZero: true,
+                ticks: {
+                    backdropColor: 'rgba(255, 255, 255, 0.5)', // Tick background
+                    color: '#333' // Tick color
+                },
+                grid: {
+                    color: 'rgba(0, 123, 255, 0.2)' // Grid color
+                }
+            }
+        },
+        plugins: {
+            legend: {
+                display: true,
+                position: 'top',
+                labels: {
+                    color: '#333', // Legend text color
+                }
+            }
+        }
+    }
+});
+
+// Update Improvement Chart
+if (improvementChart) {
+    improvementChart.destroy();
+}
+improvementChart = new Chart(improvementChartCtx, {
+    type: 'doughnut', // Changed to doughnut for a modern look
+    data: {
+        labels: ['Feet Alignment', 'Elbow Alignment', 'Jump Shot', 'Follow Through', 'Ball Trajectory'],
+        datasets: [{
+            data: improvementData,
+            backgroundColor: ['#dc3545', '#ffc107', '#28a745', '#17a2b8', '#6f42c1'],
+            borderWidth: 2,
+            borderColor: '#fff', // White border for contrast
+            hoverOffset: 4 // Slightly enlarges the slice on hover
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                position: 'bottom',
+                labels: {
+                    color: '#333', // Legend text color
+                }
+            },
+            tooltip: {
+                backgroundColor: 'rgba(0, 0, 0, 0.8)', // Tooltip background
+                titleColor: '#fff', // Tooltip title color
+                bodyColor: '#fff' // Tooltip body color
+            }
+        }
+    }
+});
+
+        }
+        
+
+        // Attach event listener for row click
+        const videoRows = document.querySelectorAll('tbody tr');
+        videoRows.forEach(row => {
+            row.addEventListener('click', () => {
+                const marks = JSON.parse(row.getAttribute('data-video-marks'));
+                const improvements = JSON.parse(row.getAttribute('data-video-improvements'));
+                updateCharts(marks, improvements);
+            });
+        });
+
+        // Initialize with the first video’s data
+        if (videoRows.length > 0) {
+            const firstRow = videoRows[0];
+            const marks = JSON.parse(firstRow.getAttribute('data-video-marks'));
+            const improvements = JSON.parse(firstRow.getAttribute('data-video-improvements'));
+            updateCharts(marks, improvements);
+        }
+
+        
+    </script>
+</body>
+</html>

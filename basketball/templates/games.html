@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Schedule - Basketball Shooting Analysis</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        header {
+            background-color: #a60033; /* Header color */
+            color: white;
+            padding: 60px; /* Adjusted padding */
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        nav {
+            margin-top: 30px; /* Space between header and nav */
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 30px; /* Spacing between links */
+            font-size: 18px;
+        }
+
+        .content-section {
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 1200px; /* Max width for content */
+            background-color: white; /* White background */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Shadow */
+            border-radius: 10px; /* Rounded corners */
+        }
+
+        .calendar-section {
+            background: linear-gradient(to right, #a60033, #800020);
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .calendar {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .calendar .date-button {
+            width: 100px;
+            height: 150px;
+            border: none;
+            border-radius: 10px;
+            background-color: #f5f5f5;
+            color: #333;
+            cursor: pointer;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .calendar .date-button:hover {
+            transform: scale(1.05);
+        }
+
+        .calendar .date-button.active {
+            background-color: #a60033;
+            color: white;
+        }
+
+        .date-button .year {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .date-button .day {
+            font-size: 24px;
+            margin-top: 10px;
+        }
+
+        .date-button .month {
+            font-size: 16px;
+            color: #666;
+        }
+
+        .toggle-score {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .toggle-score label {
+            font-size: 18px;
+        }
+
+        .toggle-score input[type="checkbox"] {
+            margin-left: 10px;
+        }
+
+        .schedule-section {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        .game-info {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .game-info .teams {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .game-info .score {
+            background: #ffd700;
+            padding: 5px 10px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #800020;
+            color: white;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background-color: #800020; /* Maroon background */
+            color: white; /* White text color */
+            padding: 40px;
+            margin: 20px auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-section h2 {
+            text-align: center;
+        }
+
+        .contact-info {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .contact-info ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .contact-info li {
+            margin: 5px 0;
+        }
+
+        /* Social Media Links */
+        .social-media {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .social-media a {
+            margin: 0 10px;
+            color: white; /* White color for social media links */
+            font-size: 24px;
+        }
+
+        .social-media a:hover {
+            color: #FFD700; /* Yellow color on hover */
+        }
+    </style>
+    <script>
+        function updateMatches(date) {
+            const matches = {
+                "2024-09-02": [
+                    { classification: "CLASSIFICATION 7-8", teams: "🇯🇵 JPN vs 🇮🇳 IND", score: "100 - 50" },
+                    { classification: "CLASSIFICATION 5-6", teams: "🇰🇷 KOR vs 🇮🇷 IRI", score: "66 - 57" },
+                    { classification: "3RD PLACE GAME", teams: "🇯🇴 JOR vs 🇨🇳 CHN", score: "63 - 84" },
+                    { classification: "FINAL", teams: "🇦🇺 AUS vs 🇳🇿 NZL", score: "96 - 33" },
+                    { classification: "SEMI-FINAL", teams: "🇺🇸 USA vs 🇫🇷 FRA", score: "88 - 70" }
+                ],
+                "2024-09-03": [
+                    { classification: "QUARTER FINAL", teams: "🇦🇷 ARG vs 🇧🇷 BRA", score: "77 - 81" },
+                    { classification: "FINAL", teams: "🇦🇺 AUS vs 🇺🇸 USA", score: "102 - 100" },
+                    { classification: "SEMI-FINAL", teams: "🇨🇦 CAN vs 🇮🇳 IND", score: "60 - 58" },
+                    { classification: "CLASSIFICATION 5-6", teams: "🇰🇷 KOR vs 🇨🇳 CHN", score: "70 - 64" },
+                    { classification: "3RD PLACE GAME", teams: "🇯🇵 JPN vs 🇳🇿 NZL", score: "88 - 91" }
+                ],
+                // Add matches for other dates
+            };
+
+            const matchContainer = document.getElementById('matchContainer');
+            matchContainer.innerHTML = '';
+
+            if (matches[date]) {
+                matches[date].forEach(match => {
+                    const matchDiv = document.createElement('div');
+                    matchDiv.className = 'game-info';
+                    matchDiv.innerHTML = `
+                        <div class="teams">
+                            <span>${match.classification}</span>
+                        </div>
+                        <div class="teams">${match.teams} <span class="score">${match.score}</span></div>
+                    `;
+                    matchContainer.appendChild(matchDiv);
+                });
+            }
+
+            // Highlight the active date
+            document.querySelectorAll('.date-button').forEach(button => {
+                button.classList.remove('active');
+            });
+            document.getElementById(date).classList.add('active');
+
+            // Update score visibility based on checkbox status
+            toggleScores();
+        }
+
+        function toggleScores() {
+            const isChecked = document.getElementById('scoreToggle').checked;
+            const scores = document.querySelectorAll('.score');
+            scores.forEach(score => {
+                score.style.display = isChecked ? 'none' : 'inline';
+            });
+        }
+
+        window.onload = () => {
+            updateMatches("2024-09-02");
+        };
+    </script>
+</head>
+
+<body>
+    <header>
+        <h1>Basketball Shooting Analysis</h1>
+        <nav class="navbar"></nav>
+            <a href="{{ url_for('home') }}" style="color: white;"><i class="fas fa-home"></i> Home</a>
+            <a href="{{ url_for('games') }}" style="color: white;"><i class="fas fa-basketball-ball"></i> Games</a>
+            <a href="{{ url_for('teams') }}" style="color: white;"><i class="fas fa-users"></i> Teams</a>
+            <a href="{{ url_for('standings') }}" style="color: white;"><i class="fas fa-list-alt"></i> Standings</a>
+        </nav>
+    </header>
+
+    <section class="content-section">
+        <h2>Game Schedule</h2>
+        
+        <div class="calendar-section">
+            <div class="calendar">
+                <button id="2024-09-02" class="date-button" onclick="updateMatches('2024-09-02')">
+                    <div class="year">2024</div>
+                    <div class="day">Mon</div>
+                    <div class="day-number">02</div>
+                    <div class="month">SEP</div>
+                </button>
+                <button id="2024-09-03" class="date-button" onclick="updateMatches('2024-09-03')">
+                    <div class="year">2024</div>
+                    <div class="day">Tue</div>
+                    <div class="day-number">03</div>
+                    <div class="month">SEP</div>
+                </button>
+                <button id="2024-09-04" class="date-button" onclick="updateMatches('2024-09-04')">
+                    <div class="year">2024</div>
+                    <div class="day">Wed</div>
+                    <div class="day-number">04</div>
+                    <div class="month">SEP</div>
+                </button>
+                <button id="2024-09-05" class="date-button" onclick="updateMatches('2024-09-05')">
+                    <div class="year">2024</div>
+                    <div class="day">Thu</div>
+                    <div class="day-number">05</div>
+                    <div class="month">SEP</div>
+                </button>
+                <button id="2024-09-06" class="date-button" onclick="updateMatches('2024-09-06')">
+                    <div class="year">2024</div>
+                    <div class="day">Fri</div>
+                    <div class="day-number">06</div>
+                    <div class="month">SEP</div>
+                </button>
+                <button id="2024-09-07" class="date-button" onclick="updateMatches('2024-09-07')">
+                    <div class="year">2024</div>
+                    <div class="day">Sat</div>
+                    <div class="day-number">07</div>
+                    <div class="month">SEP</div>
+                </button>
+            </div>
+            <!-- Toggle Score Option -->
+            <div class="toggle-score">
+                <label for="scoreToggle">Hide Scores</label>
+                <input type="checkbox" id="scoreToggle" onclick="toggleScores()">
+            </div>
+        </div>
+
+        <div class="schedule-section" id="matchContainer">
+            <!-- Matches will be dynamically added here -->
+        </div>
+    </section>
+
+    <section class="contact-section">
+        <h2>Contact Us</h2>
+        <div style="text-align: center;"> <!-- Centering the paragraph -->
+            <p>If you have any questions, feel free to reach out to us:</p>
+        </div>
+        <div class="contact-info">
+            <ul style="text-align: center;"> <!-- Centering the list -->
+                <li>Email: info@basketballanalysis.com</li>
+                <li>Phone: +1 234 567 890</li>
+                <li>Address: 123 Basketball Ave, Court City, CA 12345</li>
+            </ul>
+        </div>
+        <h3 style="text-align: center;">Follow Us</h3> <!-- Centering the heading -->
+        <div class="social-media" style="text-align: center;"> <!-- Centering the social media links -->
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2024 Basketball Shooting Analysis Tool</p>
+    </footer>
+</body>
+</html>

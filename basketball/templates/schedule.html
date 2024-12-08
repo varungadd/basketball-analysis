@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    {% include '_navbar.html' %}
+    <header>
+        <h1>Game Schedule</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="teams.html">Teams</a>
+            <a href="schedule.html">Schedule</a>
+            <a href="standings.html">Standings</a>
+            <a href="login.html" class="login-btn">Login</a>
+            <a href="register.html" class="register-btn">Register</a>
+        </nav>
+    </header>
+
+    <section class="content-section">
+        <h2>Upcoming Games</h2>
+        <table>
+            <tr>
+                <th>Date</th>
+                <th>Team 1</th>
+                <th>Team 2</th>
+                <th>Result</th>
+            </tr>
+            <tr>
+                <td>2024-10-01</td>
+                <td>Team A</td>
+                <td>Team B</td>
+                <td>80-76</td>
+            </tr>
+            <tr>
+                <td>2024-10-02</td>
+                <td>Team C</td>
+                <td>Team D</td>
+                <td>65-70</td>
+            </tr>
+        </table>
+    </section>
+</body>
+</html>

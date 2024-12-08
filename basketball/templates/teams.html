@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teams</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Font Awesome for Icons -->
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f5f5f5; /* Light background for content */
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        /* Header styling */
+        header {
+            background-color: #a60033; /* Header color */
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0; /* No margin for header */
+        }
+
+        /* Navigation bar styling */
+        .navbar {
+            background-color: #a60033; /* Navbar color */
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .navbar a {
+            color: white;
+            padding: 10px 15px; 
+            text-decoration: none;
+            font-size: 18px;
+            margin: 0 10px;
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            transition: background-color 0.3s;
+        }
+
+        .navbar a i {
+            font-size: 24px; 
+        }
+
+        .navbar a:hover {
+            background-color: #800020; /* Darker color on hover */
+            border-radius: 5px;
+        }
+
+        .content-section {
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 1200px; /* Max width for the content */
+            background-color: white; /* White background for content section */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Shadow effect */
+            border-radius: 10px; /* Rounded corners */
+        }
+
+        .content-section h2 {
+            text-align: center; /* Center the title */
+            color: #a60033; /* Title color */
+            margin-bottom: 20px; /* Space below title */
+        }
+
+        .team-info {
+            display: flex; /* Flexbox for team info */
+            justify-content: space-between; /* Space between items */
+            flex-wrap: wrap; /* Wrap items */
+            margin-bottom: 20px; /* Space below each team info */
+        }
+
+        .team-card {
+            background-color: #f9c2d4; /* Light pink for team cards */
+            border-radius: 10px; /* Rounded corners */
+            padding: 20px; /* Padding inside card */
+            width: 30%; /* Card width */
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+            text-align: center; /* Center text */
+            margin-bottom: 20px; /* Space below each card */
+            transition: transform 0.2s; /* Smooth transition */
+            cursor: pointer; /* Pointer cursor */
+        }
+
+        .team-card:hover {
+            transform: scale(1.05); /* Scale up on hover */
+        }
+
+        .team-card img {
+            width: 100%; /* Full width for images */
+            height: auto; /* Maintain aspect ratio */
+            border-radius: 10px; /* Rounded corners for images */
+        }
+
+        .team-card h3 {
+            margin-top: 10px; /* Space above team name */
+            color: #a60033; /* Team name color */
+        }
+
+        .team-card p {
+            margin: 5px 0; /* Space above and below description */
+            color: #333; /* Description color */
+        }
+
+        footer {
+            text-align: center; /* Center footer text */
+            padding: 15px; /* Padding for footer */
+            background-color: #800020; /* Footer color */
+            color: white; /* Footer text color */
+            position: relative; /* For positioning */
+            bottom: 0; /* Stay at bottom */
+            width: 100%; /* Full width */
+        }
+
+        /* Search Bar */
+        .search-bar {
+            margin: 20px auto; /* Center search bar */
+            max-width: 800px; /* Max width for search */
+            display: flex; /* Flexbox for search bar */
+        }
+
+        .search-bar input[type="text"] {
+            flex: 3; /* Increase the flex ratio to make it larger */
+            padding: 15px; /* Padding for input field */
+            border: 2px solid #a60033; /* Border color */
+            border-radius: 5px 0 0 5px; /* Rounded corners */
+            outline: none; /* Remove outline */
+            font-size: 16px; /* Font size */
+            margin-right: -5px; /* Adjust margin for better alignment */
+        }
+
+        .search-bar button {
+            flex: 1; /* Set button to take less space */
+            padding: 15px 20px; /* Padding for button */
+            background-color: #a60033; /* Button color */
+            color: white; /* Button text color */
+            border: none; /* No border */
+            border-radius: 0 5px 5px 0; /* Rounded corners */
+            cursor: pointer; /* Pointer cursor */
+        }
+
+        .search-bar button:hover {
+            background-color: #800020; /* Darker color on hover */
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background-color: #800020; /* Maroon background */
+            color: white; /* White text color */
+            padding: 40px;
+            margin: 20px auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-section h2 {
+            text-align: center;
+        }
+
+        .contact-info {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .contact-info ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .contact-info li {
+            margin: 5px 0;
+        }
+
+        /* Social Media Links */
+        .social-media {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .social-media a {
+            margin: 0 10px;
+            color: white; /* White color for social media links */
+            font-size: 24px;
+        }
+
+        .social-media a:hover {
+            color: #FFD700; /* Yellow color on hover */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Teams</h1>
+        <div class="navbar">
+            <a href="{{ url_for('home') }}"><i class="fas fa-home"></i> Home</a>
+            <a href="{{ url_for('games') }}"><i class="fas fa-basketball-ball"></i> Games</a>
+            <a href="{{ url_for('teams') }}"><i class="fas fa-users"></i> Teams</a>
+            <a href="{{ url_for('standings') }}"><i class="fas fa-list-alt"></i> Standings</a>
+        </div>
+    </header>
+
+    <div class="search-bar">
+        <input type="text" placeholder="Search for a Team...">
+        <button>Search</button>
+    </div>
+
+    <section class="content-section">
+        <h2>Team Information</h2>
+        <p>Meet the dynamic teams vying for glory in the tournament!</p>
+
+        <div class="team-info">
+            <div class="team-card">
+                <a href="{{ url_for('team1') }}">
+                    <img src="{{ url_for('static', filename='images/team1.jpg') }}" alt="Team 1">
+                    <h3>U25 Team</h3>
+                    <p>Coach: James Jebaraja S</p>
+                    <p>Location: Chennai</p>
+                </a>
+            </div>    
+            <div class="team-card" onclick="window.location.href='team2.html'">
+                <img src="{{ url_for('static', filename='images/team2.jpg') }}" alt="Team 2">
+                <h3>U18 Team</h3>
+                <p>Coach: James Jebaraja S</p>
+                <p>Location: Chennai</p>
+            </div>
+            <div class="team-card" onclick="window.location.href='team3.html'">
+                <img src="{{ url_for('static', filename='images/team3.jpg') }}" alt="Team 3">
+                <h3>Junior Varsity</h3>
+                <p>Coach: James Jebaraja S</p>
+                <p>Location: Chennai</p>
+            </div>
+            <div class="team-card" onclick="window.location.href='team4.html'">
+                <img src="{{ url_for('static', filename='images/team4.jpg') }}" alt="Team 4">
+                <h3>U19 Team</h3>
+                <p>Coach: James Jebaraja S</p>
+                <p>Location: Chennai</p>
+            </div>
+            <div class="team-card" onclick="window.location.href='team5.html'">
+                <img src="{{ url_for('static', filename='images/team5.jpg') }}" alt="Team 5">
+                <h3>U25 Team</h3>
+                <p>Coach: James Jebaraja S</p>
+                <p>Location: Chennai</p>
+            </div>
+            <div class="team-card" onclick="window.location.href='team6.html'">
+                <img src="{{ url_for('static', filename='images/team6.jpg') }}" alt="Team 6">
+                <h3>U30 Team</h3>
+                <p>Coach: James Jebaraja S</p>
+                <p>Location: Chennai</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-section">
+        <h2>Contact Us</h2>
+        <div style="text-align: center;"> <!-- Centering the paragraph -->
+            <p>If you have any questions, feel free to reach out to us:</p>
+        </div>
+        <div class="contact-info">
+            <ul style="text-align: center;"> <!-- Centering the list -->
+                <li>Email: info@basketballanalysis.com</li>
+                <li>Phone: +1 234 567 890</li>
+                <li>Address: 123 Basketball Ave, Court City, CA 12345</li>
+            </ul>
+        </div>
+        <h3 style="text-align: center;">Follow Us</h3> <!-- Centering the heading -->
+        <div class="social-media" style="text-align: center;"> <!-- Centering the social media links -->
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+    </section>
+    
+    <footer>
+        © 2024 Basketball Shooting Analysis Tool
+    </footer>
+</body>
+</html>
